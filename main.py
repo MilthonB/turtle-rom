@@ -1,6 +1,19 @@
 from fastapi import FastAPI
+import os
+from dotenv import load_dotenv
 
-app = FastAPI()
+load_dotenv()
+
+
+env = os.getenv("ENV", "development")
+
+print(env)
+
+
+if env == "production":
+    app = FastAPI(docs_url=None, redoc_url=None)
+else:
+    app = FastAPI()
 
 
 @app.get("/")
